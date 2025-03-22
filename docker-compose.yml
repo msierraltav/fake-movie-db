@@ -1,0 +1,28 @@
+services:
+  fake-movie-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data
+    restart: always
+
+  backend:
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    container_name: fake-movie-api
+    depends_on:
+      - fake-movie-db
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    command: ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:5020"]
+    ports:
+      - "5020:5020"
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=FakeMovieDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};"
+
+  
