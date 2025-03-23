@@ -34,6 +34,17 @@ docker pull mcr.microsoft.com/mssql/server:2022-latest
 
 - dotnet 9 
 
+## Development 
+
+### DB
+
+first run the 
+
+to run de dev ennvironment just run 
+```bash
+cd ./api
+dotnet run
+```
 
 
 ## Journal

@@ -5,10 +5,9 @@ services:
     environment:
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
       ACCEPT_EULA: "Y"
+      MSSQL_PID: "EnterpriseCore"
     ports:
       - "1433:1433"
-    volumes:
-      - ./data:/var/opt/mssql/data
     restart: always
 
   backend:
@@ -23,6 +22,6 @@ services:
     ports:
       - "5020:5020"
     environment:
-      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=FakeMovieDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};"
+      ConnectionStrings__DefaultConnection: "Server=host.docker.internal;Database=FakeMovieDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};"
 
   
