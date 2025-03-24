@@ -1,5 +1,8 @@
 # fake-movie-db
-A fake movie database with information about movies and actors as part of a technical test interview
+
+![Fake Movie DB Preview](./docs/main.png)
+
+A full-stack application for searching movies by title, actor, or genre. Built with .NET Core EF backend, deno & React frontend, and SQL Server database all of them running in docker containers.
 
 ## Requirements
 
@@ -23,7 +26,12 @@ A fake movie database with information about movies and actors as part of a tech
 
 ## Dataset
 
-The dataset was taken from [IMDb](https://developer.imdb.com/non-commercial-datasets/) and only using the title basics and name basics, based on the requirements of the assignment and with date of 18 March 2025: [datasets](https://datasets.imdbws.com/)
+The dataset was taken from [IMDb](https://developer.imdb.com/non-commercial-datasets/) and only using the following files : 
+
+- title basics
+- name basics
+
+based on the requirements of the assignment and with date of 18 March 2025: [datasets](https://datasets.imdbws.com/) and need to be upload to your MS-SQL server instance.
 
 ### DB
 
@@ -32,11 +40,17 @@ The dataset was taken from [IMDb](https://developer.imdb.com/non-commercial-data
 docker pull mcr.microsoft.com/mssql/server:2022-latest
 ```
 
-### Backend
 
-- .NET 9 
+![Fake Movie DB Moview preview](./docs/details.png)
 
 ## Development 
+
+
+### TL:DR
+
+```bash
+docker compose up -build
+```
 
 ### DB and API
 
@@ -63,6 +77,8 @@ dotnet ef database update
 
 # you could undo this action, use:
 dotnet ef migrations remove
+
+# Now you are ready to upload the data from the datasets.
 ```
 
 ### Frontend
