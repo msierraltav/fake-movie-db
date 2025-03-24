@@ -10,9 +10,8 @@ A fake movie database with information about movies and actors as part of a tech
 ## Goals
 
 - Search Movie by titlee, actor, title or genre.
-- Show results of seach in /
-- show movies related
-- show details of the movie /movie/
+- Show results of search in /
+- show Actors related in a /movie/id new component or page
 
 ## Arquitecture
 
@@ -96,3 +95,5 @@ now.. its time to the last part, the frontend...
 ( you could check the time of those messages doing a commit blame or with the git intelisence)
 
 For the Frontend I choose DENO , because use Typescript by default so I forced to use it and I install sass to work more confortable with css, I know tailwind but I preffer the control a more pure css.
+
+now! with a first aproach to the frontend its time to give life to the search component and create the results components.

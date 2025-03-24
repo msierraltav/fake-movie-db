@@ -3,6 +3,20 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// accept origin from localhost.
+// for production, you should use a real domain name here.
+builder.Services.AddCors(options =>
+{
+    string front_url = Environment.GetEnvironmentVariable("FRONTEND_URL") ?? "";
+
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins(front_url)
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -31,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
