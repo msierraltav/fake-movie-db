@@ -9,7 +9,7 @@ A fake movie database with information about movies and actors as part of a tech
 
 ## Goals
 
-- Search Movie a movie by actor, title or genre.
+- Search Movie by titlee, actor, title or genre.
 - Show results of seach in /
 - show movies related
 - show details of the movie /movie/
@@ -22,6 +22,9 @@ A fake movie database with information about movies and actors as part of a tech
 - Backend - Dotnetcore
 - Frontend - NextJS ( react  vite )
 
+## Dataset
+
+The dataset was taken from [imDb](https://developer.imdb.com/non-commercial-datasets/) and only using the title basics and name basics, based in the requirements of the assgintment and with date of 18 March 2025:  [datasets](https://datasets.imdbws.com/)
 
 ### DB
 
@@ -49,8 +52,7 @@ dotnet run
 to set your connection string in a development instance
 
 ```bash
-export ConnectionStrings__FakeMovieDB="Server=host.docker.internal;Database=FakeMovieDb;User Id=sa;Password=my_super_secure_password;"
-```
+export ConnectionStrings__FakeMovieDB="Server=host.docker.internal;Database=FakeMovieDb;User Id=sa;Password=<yoursupersecurepassword>;Encrypt=False;TrustServerCertificate=True"
 
 to init the db just run the following comamnds 
 ```bash
@@ -71,6 +73,16 @@ dotnet ef migrations remove
 using the information taken from [here](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&tabs=cli&pivots=cs1-bash)
 
 - I took this sunday to configure the API, and by my fault of practice it took me more time than I spected, in general in enterpices the db is already configured, in general.
+
+also i had a lot of issues configuring [ODBC 17 ](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver16&tabs=ubuntu18-install%2Cubuntu17-install%2Cdebian8-install%2Credhat7-13-install%2Crhel7-offline) and MSSQL on docker and ubuntu for development.
+
+and after investigate how to connect the API to the MSSQL , and upload the datasets using DBbeaver I vibecode the Controller , one of my goals is simplify the next step so I added pagination, in the search call.
+
+I a second version of this Api I want to increase performance only using documentation and hard work, but now , I need speed.
+
+now.. its time to the last part, the frontend... 
+
+( you could check the time of those messages doing a commit blame or with the git intelisence)
 
 
 

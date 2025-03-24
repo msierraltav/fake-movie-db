@@ -1,4 +1,4 @@
-
+external_data/
 data/
 .env
 ## A streamlined .gitignore for modern .NET projects
@@ -85,3 +85,4 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/react,dotnetcore
+
