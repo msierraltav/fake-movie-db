@@ -2,7 +2,7 @@
 
 ![Fake Movie DB Preview](./docs/main.png)
 
-A full-stack application for searching movies by title, actor, or genre. Built with .NET Core EF backend, deno & React frontend, and SQL Server database all of them running in docker containers.
+A full-stack application for searching movies by title, actor, or genre. Built with .NET Core EF backend, deno and React frontend, and SQL Server database all of them running in docker containers.
 
 ## Requirements
 
@@ -14,7 +14,7 @@ A full-stack application for searching movies by title, actor, or genre. Built w
 
 - Search Movie by title, actor, or genre.
 - Show results of search in /
-- Show Actors related in a /movie/id new component or page
+- Show Actors related in a movie in a new component
 
 ## Architecture
 
@@ -106,7 +106,7 @@ In a second version of this API, I want to increase performance using only docum
 
 Now it's time for the last part, the frontend...
 
-(You could check the time of these messages by doing a commit blame or with git intelligence)
+(You could check the time of these messages by doing a commit blame or with git intellisense)
 
 For the Frontend, I chose DENO because it uses TypeScript by default, forcing me to use it. I installed SASS to work more comfortably with CSS. I know Tailwind but I prefer the control of more pure CSS.
 
