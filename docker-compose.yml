@@ -23,3 +23,15 @@ services:
       - "5020:5020"
     environment:
       ConnectionStrings__FakeMovieDB: "Server=host.docker.internal;Database=FakeMovieDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};Encrypt=False;TrustServerCertificate=True"
+
+  frontend:
+    image: denoland/deno:alpine-2.2.5
+    container_name: fake-movie-frontend
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    command: ["deno", "run", "serve", "--allow-net", "--allow-read", "--allow-env"]
+    ports:
+      - "8000:8000"
+    environment:
+      VITE_API_URL: "${VITE_API_URL}"

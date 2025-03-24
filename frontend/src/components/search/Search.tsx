@@ -16,7 +16,7 @@ function Search({setMovies} : SearchProps) {
   const [searchResults, setSearchResults] = useState<MovieResponse | null>(null);
   const [hasSearched, setHasSearched] = useState<boolean>(false);
 
-  const { refetch, data, loading } = useApiCall<MovieResponse>();
+  const { refetch } = useApiCall<MovieResponse>();
 
   const handleSearch = () => {
     const searchQuery = (document.getElementById("searchInput") as HTMLInputElement)?.value;

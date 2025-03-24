@@ -1,11 +1,5 @@
 import { useState, useCallback } from 'react';
 
-interface ApiCallProps {
-    query: string;
-    page?: number;
-    pageSize?: number;
-}
-
 interface ApiResponse<T> {
     data: T | null;
     loading: boolean;

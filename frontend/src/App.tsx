@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Search from './components/search/Search'
 import Status from './components/status/Status'
-import Results from './components/results/Results';
 
 interface MovieItem {
   id: number;
