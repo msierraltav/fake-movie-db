@@ -22,6 +22,4 @@ services:
     ports:
       - "5020:5020"
     environment:
-      ConnectionStrings__DefaultConnection: "Server=host.docker.internal;Database=FakeMovieDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};"
-
-  
+      ConnectionStrings__FakeMovieDB: "Server=host.docker.internal;Database=FakeMovieDb;User Id=sa;Password=${MSSQL_SA_PASSWORD};Encrypt=False;TrustServerCertificate=True"
