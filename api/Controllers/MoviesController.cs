@@ -53,15 +53,18 @@ namespace api.Controllers{
             // Calculate skip for pagination
             int skip = (page - 1) * pageSize;
             
-            // Create a base query that we'll reuse
+            // Use ToList() to switch to client-side evaluation before performing the Split operation
             var actorsQuery = _context.NameBasics
-                .Where(actor => actor.KnownForTitles != null && actor.KnownForTitles.Split(new char[] {','}).Contains(movie.Tconst))
+                .Where(actor => actor.KnownForTitles != null)
+                .AsNoTracking()  // For better performance in read-only scenario
+                .ToList()
+                .Where(actor => actor.KnownForTitles.Split(',').Contains(movie.Tconst))
                 .AsQueryable();
                 
-            // Get total count efficiently 
+            // Get total count
             var totalCount = actorsQuery.Count();
                 
-            // Execute the paged query with minimal data transfer
+            // Execute the paged query
             var actors = actorsQuery
                 .Skip(skip)
                 .Take(pageSize)
@@ -69,14 +72,11 @@ namespace api.Controllers{
                 
             // Calculate total pages
             int totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
-            
-            stopwatch.Stop();
-            
             return new { 
                 currentPage = page, 
                 pageSize, 
                 totalItems = totalCount, 
-                totalPages = totalPages,
+                totalPages,
                 millisecondsTaken = stopwatch.ElapsedMilliseconds,
                 items = actors 
             };

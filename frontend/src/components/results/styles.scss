@@ -1,0 +1,54 @@
+.results {
+  margin: 20px 0;
+  
+  .stats {
+    margin-bottom: 10px;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+      
+      &:hover {
+        background: #7c7c7c;
+      }
+      
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+    &.active {
+      background: #2c3e50;
+    }
+    }
+    
+    span {
+      margin: 0 4px;
+    }
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+  }
+}

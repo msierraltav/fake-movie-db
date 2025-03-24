@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react"
 import "./styles.scss"
 import type { MovieResponse } from "../../App"
-
+import { useApiCall } from "../../hooks/useApiCall."
+import Results from "../results/Results"
 
 type SearchProps = {
   setMovies: (movies: MovieResponse) => void;
 }
 
 function Search({setMovies} : SearchProps) {
-
   const [searchDisabled, setSearchDisabled] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [searching, setSearching] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchResults, setSearchResults] = useState<MovieResponse | null>(null);
+  const [hasSearched, setHasSearched] = useState<boolean>(false);
+
+  const { refetch, data, loading } = useApiCall<MovieResponse>();
 
   const handleSearch = () => {
     const searchQuery = (document.getElementById("searchInput") as HTMLInputElement)?.value;
     setSearchValue(searchQuery);
+    setCurrentPage(1); // Reset to first page on new search
+    setHasSearched(true); // Mark that a search has been attempted
   } 
 
   const handleEnableSearchButton = () => {
@@ -28,39 +35,39 @@ function Search({setMovies} : SearchProps) {
     }
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   useEffect(() => {
-    console.log("searching..." , searchValue);
-    const apiUrl = import.meta.env.VITE_API_URL;
-
-    const apiQuery = `${apiUrl}/api/movies/search?query=${searchValue}&page=1&pageSize=10`;
-
-    console.log("apiUrl", apiQuery);
-    const doSearch = async() => {
-      setSearchDisabled(true);
+    if (searchValue.length > 0) {
       setSearching(true);
-
-      await fetch(apiQuery).then((response) => {
-        return response.json();
-      }).then((response) => {
-        setMovies(response);
-      })
-      .finally(() => {
-        setSearchDisabled(false);
-        setSearching(false);
-      });
+      refetch(searchValue, currentPage, 9)  // Include currentPage
+        .then(data => {
+          setMovies(data as MovieResponse);
+          setSearchResults(data as MovieResponse);
+        })
+        .finally(() => {
+          setSearching(false);
+        });
     }
-
-    doSearch();
-
-  },[searchValue])
+  }, [searchValue, currentPage, refetch, setMovies]); // Add currentPage as dependency
 
   return (
     <>
-      {
-        searching? <h2>Searching...</h2> : <h2>Search</h2>
-      }
-      <input onChange={handleEnableSearchButton} id="searchInput" type="text" placeholder="Search..." />
-      <button onClick={() => (handleSearch())} disabled={searchDisabled}>Search</button>
+      <div className="search-container">
+        {searching? <h2>Searching...</h2> : <h2>Search</h2>}
+        <input onChange={handleEnableSearchButton} id="searchInput" type="text" placeholder="Search..." />
+        <button onClick={() => (handleSearch())} disabled={searchDisabled}>Search</button>
+      </div>
+      
+      {searchResults && (
+        <Results 
+          data={searchResults} 
+          onPageChange={handlePageChange}
+          hasSearched={hasSearched}
+        />
+      )}
     </>
   )
 }
