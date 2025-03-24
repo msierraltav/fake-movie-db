@@ -39,7 +39,7 @@ docker pull mcr.microsoft.com/mssql/server:2022-latest
 
 ## Development 
 
-### DB
+### DB and API
 
 first run the 
 
@@ -67,6 +67,17 @@ dotnet ef database update
 dotnet ef migrations remove
 ```
 
+### Frontend
+
+> requirements
+    [Deno](https://docs.deno.com/deploy/manual/)
+
+```
+cd ./frontend
+deno install
+deno run dev
+```
+
 ## Journal
 
 - First , after define what I want to build and the tools based on the requirementes, I started to create the docker compose with the windows server db
@@ -84,5 +95,4 @@ now.. its time to the last part, the frontend...
 
 ( you could check the time of those messages doing a commit blame or with the git intelisence)
 
-
-
+For the Frontend I choose DENO , because use Typescript by default so I forced to use it and I install sass to work more confortable with css, I know tailwind but I preffer the control a more pure css.
